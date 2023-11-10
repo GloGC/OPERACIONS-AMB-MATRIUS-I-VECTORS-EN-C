@@ -283,5 +283,19 @@ int main(){
         Jacobi(MatDD, V3, V4, 1000);
         PrintVect(V4, 0, 10);
 
+        float Residu[N];
+        for (int i = 0; i < N; i++) {
+                Residu[i] = MatDD[i][i] * V4[i];
+                for (int j = 0; j < N; j++) {
+                        Residu[i] -= MatDD[i][j] * V4[j];
+                }
+        }
+        float errorRelatiu = 0.0;
+        for (int i = 0; i < N; i++){
+                errorRelatiu += Residu[i] * Residu[i];
+        }
+        errorRelatiu = sqrt(errorRelatiu) / Magnitude(V3);
+        printf("L'error relatiu és %f.\n",errorRelatiu);
+
         Jacobi(Mat, V3, V4, 1);
 }
